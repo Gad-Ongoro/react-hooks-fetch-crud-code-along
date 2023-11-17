@@ -1,6 +1,6 @@
 import React from "react";
 
-function Item({ item, onUpdateItem, onDeleteItem }) {
+function Item({ item, onUpdateItem, items, setItems }) {
 
   // PATCH
   function handleAddToCartClick() {
@@ -24,7 +24,16 @@ function Item({ item, onUpdateItem, onDeleteItem }) {
       method: "DELETE",
     })
       .then((r) => r.json())
-      .then(() => console.log("deleted!"));
+      .then(() => {
+        let idToDel = item.id;
+        let updatedItem = items.filter((item) => {
+          return(
+            //idToDel !== item.id
+            item.id !== idToDel
+          )
+        })
+        setItems(updatedItem);
+      });
   }
 
   return (
